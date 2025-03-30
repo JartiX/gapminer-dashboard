@@ -1,8 +1,7 @@
 import dash
-from dash import dcc, html, Input, Output, State
+from dash import dcc, html, Input, Output
 import dash_draggable
 import plotly.express as px
-import pandas as pd
 
 df = px.data.gapminder()
 
