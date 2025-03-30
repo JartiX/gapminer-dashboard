@@ -12,7 +12,7 @@ numeric_measures = ['lifeExp', 'pop', 'gdpPercap']
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+application = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 style_dashboard={
           "height":'100%',
@@ -24,7 +24,7 @@ style_dashboard={
 
 default_country = ['Costa Rica']
 
-app.layout = html.Div([
+application.layout = html.Div([
     html.Div([
         html.H4("Выбор стран и меры для оси Y (Линейный график)"),
         dcc.Dropdown(
@@ -96,7 +96,7 @@ app.layout = html.Div([
     )
 ])
 
-@app.callback(
+@application.callback(
     Output('line-chart', 'figure'),
     Input('line-country-dropdown', 'value'),
     Input('line-yaxis-dropdown', 'value'),
@@ -109,7 +109,7 @@ def update_line_chart(selected_countries, y_measure):
                   title=f"Линейный график: {y_measure} по годам")
     return fig
 
-@app.callback(
+@application.callback(
     Output('bubble-chart', 'figure'),
     Input('bubble-x-dropdown', 'value'),
     Input('bubble-y-dropdown', 'value'),
@@ -123,7 +123,7 @@ def update_bubble_chart(x_measure, y_measure, size_measure, year):
                      title=f"Пузырьковая диаграмма ({year})")
     return fig
 
-@app.callback(
+@application.callback(
     Output('top15-chart', 'figure'),
     Input('year-slider', 'value'),
 )
@@ -133,7 +133,7 @@ def update_top15_chart(year):
                  title=f"Топ-15 стран по популяции ({year})")
     return fig
 
-@app.callback(
+@application.callback(
     Output('pie-chart', 'figure'),
     Input('year-slider', 'value'),
 )
