@@ -143,6 +143,3 @@ def update_pie_chart(year):
     fig = px.pie(pop_by_continent, names='continent', values='pop',
                  title=f"Распределение популяции по континентам ({year})")
     return fig
-
-if __name__ == '__main__':
-    app.run(debug=True)
