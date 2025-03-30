@@ -2,3 +2,4 @@ dash
 dash-draggable
 plotly
 pandas
+gunicorn
