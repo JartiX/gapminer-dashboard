@@ -101,12 +101,20 @@ application.layout = html.Div([
     Input('line-yaxis-dropdown', 'value'),
 )
 def update_line_chart(selected_countries, y_measure):
-    if not selected_countries or len(selected_countries) == 0:
-        return {}
     filtered_df = df[df['country'].isin(selected_countries)]
     fig = px.line(filtered_df, x='year', y=y_measure, color='country',
                   title=f"Линейный график: {y_measure} по годам")
+    fig.update_traces(mode='lines+markers', marker=dict(size=10))
     return fig
+
+@application.callback(
+    Output('year-slider', 'value'),
+    Input('line-chart', 'clickData')
+)
+def update_slider_on_click(clickData):
+    if clickData:
+        return clickData['points'][0]['x']
+    return dash.no_update
 
 @application.callback(
     Output('bubble-chart', 'figure'),
